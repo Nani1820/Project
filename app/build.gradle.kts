@@ -15,7 +15,21 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    
+}
+
+kover {
+    coverageEngine.set(org.jetbrains.kotlinx.kover.api.CoverageEngine.INTELLIJ)
+    htmlReport { onCheck.set(true) }
+    xmlReport { onCheck.set(true) }
+}
+
+tasks.withType<Test> {
+    useJUnitPlatform() // For unit tests
+    extensions.configure(org.jetbrains.kotlinx.kover.api.KoverTestTaskExtension::class) {
+        isEnabled.set(true)
     }
+}
 
     buildTypes {
         release {
