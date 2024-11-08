@@ -1,6 +1,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("org.jetbrains.kotlinx.kover") version "0.7.0-Beta"
 }
 
 android {
@@ -16,12 +17,6 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     
-}
-
-kover {
-    coverageEngine.set(org.jetbrains.kotlinx.kover.api.CoverageEngine.INTELLIJ)
-    htmlReport { onCheck.set(true) }
-    xmlReport { onCheck.set(true) }
 }
 
 tasks.withType<Test> {
@@ -47,6 +42,12 @@ tasks.withType<Test> {
     kotlinOptions {
         jvmTarget = "11"
     }
+
+    kover {
+    coverageEngine.set(org.jetbrains.kotlinx.kover.api.CoverageEngine.INTELLIJ)
+    htmlReport { onCheck.set(true) }
+    xmlReport { onCheck.set(true) }
+}
 }
 
 dependencies {
